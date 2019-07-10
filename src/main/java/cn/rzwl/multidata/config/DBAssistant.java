@@ -25,17 +25,6 @@ public class DBAssistant extends AbstractRoutingDataSource {
         String dbBean = dbStore.get();
         return dbBean;
     }
-
-    @Bean
-    public DataSource addSource(@Autowired DataSource test1, @Autowired DataSource test2){
-        DBAssistant assistant = new DBAssistant();
-        Map<Object, Object> dataSources = new HashMap<>();
-        dataSources.put(DBAssistant.SourceName.TEST1.dbName,test1);
-        dataSources.put(DBAssistant.SourceName.TEST2.dbName,test2);
-        assistant.setTargetDataSources(dataSources);
-        assistant.setDefaultTargetDataSource( test1 );
-        return assistant;
-    }
     
     enum SourceName{
         TEST1("test1"),TEST2("test2");
