@@ -1,5 +1,6 @@
 package cn.rzwl.multidata.config;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,20 +13,24 @@ import java.util.Map;
 
 /**
  * @author : championjing
- * @ClassName: DBAssistant
+ * @ClassName: DynamicDataSourceRouter
  * @Description:
  * @Date: 7/10/2019 3:26 PM
  */
-public class DBAssistant extends AbstractRoutingDataSource {
+public class DynamicDataSourceRouter extends AbstractRoutingDataSource {
     
     public static final ThreadLocal<String> dbStore = new ThreadLocal<>();
 
     @Override
     protected Object determineCurrentLookupKey() {
         String dbBean = dbStore.get();
+        if(StringUtils.isBlank(dbBean)){
+            dbBean = SourceName.TEST1.dbName;
+        } else {
+            
+        }
         return dbBean;
     }
-    
     enum SourceName{
         TEST1("test1"),TEST2("test2");
         

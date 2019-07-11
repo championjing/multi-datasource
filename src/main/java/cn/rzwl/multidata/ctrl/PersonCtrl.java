@@ -2,8 +2,10 @@ package cn.rzwl.multidata.ctrl;
 
 import cn.rzwl.multidata.dao.PersonRepo;
 import cn.rzwl.multidata.entity.Person;
+import cn.rzwl.multidata.service.PersonService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +24,7 @@ import java.util.List;
 public class PersonCtrl {
     
     @Autowired
-    private PersonRepo personRepo;
+    private PersonService personService;
     @Autowired
     private DataSource dataSource;
     
@@ -34,7 +36,7 @@ public class PersonCtrl {
     @GetMapping("/person")
     public List<Person> list(){
         log.info("获取所有用户");
-        List<Person> all = personRepo.findAll();
+        List<Person> all = personService.list();
         log.info("用户条数:{}",all.size());
         return all;
     }
