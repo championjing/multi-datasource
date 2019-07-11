@@ -45,7 +45,7 @@ public class JpaEntityManager {
         return builder
                 .dataSource(routingDataSource)//关键：注入routingDataSource
                 .properties(properties)
-                .packages("cn.rzwl.multidata.entity")
+                .packages("cn.rzwl.multidata.entity") //TODO 改成自己的实体类包
                 .persistenceUnit("myPersistenceUnit")
                 .build();
     }
